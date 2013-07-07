@@ -20,7 +20,7 @@ module AutoIndent
       open(source_file).read.each_line.each_with_index{ |line_content, i|
         line_num = i+1
         line_content.chomp!
-        next unless line_content.chomp.length > 0
+        next unless line_content.length > 0
 
         current = AutoIndent::Line.new(line_content)
 
@@ -41,13 +41,18 @@ module AutoIndent
 
         if actual_diff != recommended_diff && prob.prob(actual_diff) < threshold
 
+          offset = 0
+          if prev.indent + recommended_diff < 0
+            offset = - recommended_diff
+          end
+
           puts "#{ source_file } line #{line_num}, #{ actual_diff } should #{ recommended_diff } by #{ prob.prob(recommended_diff) }"
-          puts prev.content_with_indent(prev.indent + 2)
-          puts "- #{current.content}"
-          puts "+ #{current.content_with_indent(prev.indent + recommended_diff)}"
+          puts prev.content_with_indent(prev.indent + offset + 2)
+          puts "- #{current.content_with_indent(current.indent + offset)}"
+          puts "+ #{current.content_with_indent(prev.indent + offset + recommended_diff)}"
           puts
-          prev = current
         end
+        prev = current
       }
     end
 
