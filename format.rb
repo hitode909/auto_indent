@@ -4,7 +4,7 @@ require 'auto_indent'
 require 'json'
 
 unless ARGV.length == 2
-  warn "usage: #{ $0 } LEARNED_DATA SOURCE_CODE > FORMATTED_SOURCE_CODE"
+  warn "usage: #{ $0 } LEARNED_DATA SOURCE_CODE FORMATTED_SOURCE_CODE"
 end
 
 LEARNED_DATA, SOURCE_CODE = *ARGV
