@@ -7,7 +7,7 @@ require 'json'
 opt = OptionParser.new
 
 OPTS = {
-  :threshold => 0.5,
+  :threshold => 0.8,
 }
 
 opt.on('--threshold threshold') {|v| OPTS[:threshold] = v.to_f }

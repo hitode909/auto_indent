@@ -39,7 +39,7 @@ module AutoIndent
         actual_diff = current.indent - prev.indent
         recommended_diff = diff_for(prev.tail, current.head)
 
-        if actual_diff != recommended_diff && prob.prob(actual_diff) < threshold
+        if actual_diff != recommended_diff && prob.prob(recommended_diff) > threshold
 
           offset = 0
           if prev.indent + recommended_diff < 0
