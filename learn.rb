@@ -1,6 +1,7 @@
 $:.unshift(File.dirname(__FILE__) + "/lib")
 
 require 'auto_indent'
+require 'json'
 
 unless ARGV.length > 0
   warn "usage: #{ $0 } ~/PATH_TO_SOME_PROJECT/lib/**/*.rb > LEARNED_DATA"
@@ -19,5 +20,5 @@ ARGV.each{ |file|
 }
 
 database.each{ |head, tail, prob|
-  puts [tail, head, prob.result].join(",") if prob.result != 0
+  puts [tail, head, JSON.dump(prob.dump)].join(",")
 }

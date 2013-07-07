@@ -4,6 +4,14 @@ module AutoIndent
       @data = Hash.new{ 0 }
     end
 
+    def self.new_from_data(data)
+      object = new
+      object.instance_eval {
+        @data = data
+      }
+      object
+    end
+
     def add(key)
       @data[key] += 1
     end
@@ -18,11 +26,15 @@ module AutoIndent
     end
 
     def result
-      keys.first
+      keys.first.to_i
     end
 
     def count(key)
       @data[key]
+    end
+
+    def dump
+      @data
     end
   end
 

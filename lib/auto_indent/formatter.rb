@@ -4,9 +4,9 @@ module AutoIndent
       @rule = { }
     end
 
-    def add_rule(tail, head, diff)
+    def add_rule(tail, head, prob)
       @rule[tail] ||= { }
-      @rule[tail][head] = diff
+      @rule[tail][head] = prob
     end
 
     def format(source_code)
@@ -33,8 +33,9 @@ module AutoIndent
     end
 
     def diff_for(tail, head)
-      @rule[tail][head] || 0
-    rescue
+      @rule[tail][head].result || 0
+    rescue => error
+      warn error
       0
     end
   end
