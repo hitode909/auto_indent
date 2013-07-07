@@ -22,6 +22,7 @@ module AutoIndent
     end
 
     def content_with_indent(size)
+      size = [size, 0].max
       content.gsub(/^ */, ' ' * size)
     end
 
